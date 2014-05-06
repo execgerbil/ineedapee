@@ -1,0 +1,2 @@
+module WashroomsHelper
+end

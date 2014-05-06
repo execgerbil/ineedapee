@@ -1,0 +1,7 @@
+%h1 Listing All Washrooms
+= link_to "Create New Washroom", new_washroom_path
+- @washrooms.each do |washroom|
+  %h2= link_to washroom.name, washroom
+  %p= washroom.address
+  %p
+  %hr

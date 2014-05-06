@@ -1,0 +1,9 @@
+%h1= @washroom.name
+%p= @washroom.address
+%p
+  = link_to "Edit", edit_washroom_path(@washroom)
+  %br
+  = button_to "Delete", @washroom, method: :delete, data: {confirm: "Are you sure? It's gone for good!"}
+  %br
+  = link_to "All Washrooms", washrooms_path
+  %br
