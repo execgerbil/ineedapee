@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428224119) do
+ActiveRecord::Schema.define(version: 20140513190228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "people", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "populations", force: true do |t|
+    t.integer  "person_id"
+    t.integer  "washroom_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "populations", ["person_id"], name: "index_populations_on_person_id", using: :btree
+  add_index "populations", ["washroom_id"], name: "index_populations_on_washroom_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -41,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140428224119) do
     t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
 end

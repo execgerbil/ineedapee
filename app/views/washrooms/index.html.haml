@@ -3,5 +3,9 @@
 - @washrooms.each do |washroom|
   %h2= link_to washroom.name, washroom
   %p= washroom.address
+  - if washroom.people.present?
+    Type: (#{washroom.people.count}):
+    = washroom.people.map(&:title).join(", ")
+    %br
   %p
   %hr

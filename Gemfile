@@ -30,6 +30,10 @@ gem 'rspec-rails', group: [:development, :test]
 gem 'factory_girl_rails', group: [:development, :test]
 gem 'faker'
 
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'geocoder'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

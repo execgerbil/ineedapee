@@ -1,6 +1,8 @@
 class WashroomsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_washroom, only: [ :edit, :destroy, :update]
+
 
   def index
     @washrooms = Washroom.all
@@ -11,7 +13,8 @@ class WashroomsController < ApplicationController
   end
 
   def create
-    @washroom = Washroom.new(washroom_attributes)
+    @washroom      = Washroom.new(washroom_attributes)
+    @washroom.user = current_user
     if @washroom.save
       redirect_to washrooms_path, notice: "Your washroom listing was created!"
     else
@@ -24,7 +27,16 @@ class WashroomsController < ApplicationController
     @washroom = Washroom.find(params[:id])
   end
 
+  def edit
+  end
+
   def update
+    if @washroom.update_attributes(washroom_attributes)
+      redirect_to @washroom, notice: "Washroom updated!"
+    else
+      flash.now[:alert] = "Couldn't update!"
+      render :edit
+    end
   end
 
   def destroy
@@ -37,6 +49,12 @@ class WashroomsController < ApplicationController
 
 
   def washroom_attributes
-    params.require(:washroom).permit([:name, :address])
+    params.require(:washroom).permit([:name, :address, {person_ids: []}])
+    end
+
+  def find_washroom
+    @washroom = current_user.washrooms.find_by_id(params[:id])
+    redirect_to root_path, alert: "Access Denied" unless @washroom
   end
+
 end

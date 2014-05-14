@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe WashroomsController do
 
-  let (:user) {create(:user)}
-  let (:washroom) {create(:washroom, user: user)}
+  let!(:user) { create(:user) }
+  let!(:washroom) { create(:washroom, user: user) }
 
   context "with user signed in" do
   before { sign_in user }
@@ -38,11 +38,11 @@ describe WashroomsController do
   end
 
   describe "#destroy" do
-    # it "deletes the washroom listing" do
-    #   expect do
-    #     delete :destroy, washroom_id: washroom.id
-    #   end.to change { washroom.count }.by(-1)
-    # end
+     it "deletes the washroom listing" do
+            expect do
+        delete :destroy, id: washroom.id
+      end.to change { Washroom.count }.by(-1)
+    end
 
   end
 
